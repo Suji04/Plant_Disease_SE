@@ -50,6 +50,17 @@
 	// 	die();
 	// }
 	
+	$sql .= " ORDER BY ";
+	$i = 0;
+	foreach ($terms as $each) {
+	    $i++;
+	    if ($i != 1){
+	        $sql .= "+";
+	    }
+	    $sql .= "IF(keywords LIKE '%$each%',1,0)";
+	}
+	$sql .= " DESC";		
+		
 	$result = mysqli_query($link, $sql); 
 	if(mysqli_num_rows($result) == 0)
 		{ echo "No results found!"; }
